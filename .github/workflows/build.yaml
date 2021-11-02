@@ -95,10 +95,8 @@ jobs:
     name: Self-test
     runs-on: ubuntu-latest
     steps:
-      # Checkout your project with git
       - name: Checkout
         uses: actions/checkout@v2
-      # Run trojansourcedetector
       - name: Trojan Source Detector
         uses: ./
   release:
@@ -112,6 +110,7 @@ jobs:
       - codeql
       - test
       - trojansource
+      - selftest
     steps:
       - name: Checkout
         uses: actions/checkout@v2

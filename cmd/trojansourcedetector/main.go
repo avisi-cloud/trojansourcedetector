@@ -1,0 +1,67 @@
+package main
+
+import (
+	"encoding/json"
+	"errors"
+	"flag"
+	"fmt"
+	"os"
+
+	"github.com/haveyoudebuggedit/trojansourcedetector"
+)
+
+const defaultConfigFile = ".trojansourcedetector.json"
+
+func main() {
+	configFile := defaultConfigFile
+
+	flag.StringVar(&configFile, "config", configFile, "JSON file containing the configuration.")
+	flag.Parse()
+
+	cfg, err := readConfigFile(configFile)
+	if err != nil {
+		if !errors.Is(err, os.ErrNotExist) || configFile != defaultConfigFile {
+			panic(err)
+		}
+	}
+
+	detector := trojansourcedetector.New(cfg)
+	errs := detector.Run()
+	if err := writeErrors(errs); err != nil {
+		panic(err)
+	}
+	if len(errs.Get()) > 0 {
+		os.Exit(1)
+	} else {
+		fmt.Printf("No errors found.")
+	}
+}
+
+func writeErrors(errors trojansourcedetector.Errors) error {
+	for _, e := range errors.Get() {
+		encoded, err := e.JSON()
+		if err != nil {
+			return fmt.Errorf("bug: failed to encode error entry (%w)", err)
+		}
+		fmt.Printf("%s\n", encoded)
+	}
+	return nil
+}
+
+func readConfigFile(file string) (*trojansourcedetector.Config, error) {
+	result := &trojansourcedetector.Config{}
+	result.Defaults()
+	fh, err := os.Open(file) //nolint:gosec
+	if err != nil {
+		return nil, fmt.Errorf("failed to open config file %s (%w)", file, err)
+	}
+	defer func() {
+		_ = fh.Close()
+	}()
+	decoder := json.NewDecoder(fh)
+	decoder.DisallowUnknownFields()
+	if err := decoder.Decode(&result); err != nil {
+		return nil, fmt.Errorf("failed to decode configuration file %s (%w)", file, err)
+	}
+	return result, nil
+}

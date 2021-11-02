@@ -1,0 +1,13 @@
+name: 'Trojan Source Detector'
+description: 'Detect Trojan Source and other Unicode vulnerabilities'
+branding:
+  icon: 'activity'
+  color: 'orange'
+inputs:
+  config:
+    description: 'Configuration file to use.'
+    required: false
+    default: '.trojansourcedetector.json'
+runs:
+  using: 'docker'
+  image: 'Dockerfile'

@@ -1,4 +1,11 @@
 {
+  "exclude": [
+    ".git",
+    ".git/*",
+    ".git/*/*",
+    ".git/*/*/*",
+    ".github/scripts/*.sh"
+  ],
   "detect_unicode": true,
   "detect_bidi": false
 }

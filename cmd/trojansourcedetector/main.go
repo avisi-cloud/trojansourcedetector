@@ -39,11 +39,22 @@ func main() {
 
 func writeErrors(errors trojansourcedetector.Errors) error {
 	for _, e := range errors.Get() {
-		encoded, err := e.JSON()
-		if err != nil {
-			return fmt.Errorf("bug: failed to encode error entry (%w)", err)
+		if os.Getenv("GITHUB_ACTIONS") != "" {
+			fmt.Printf(
+				"::error file=%s,line=%d,col=%d,title=%s::%s\n",
+				e.File(),
+				e.Line(),
+				e.Column(),
+				e.Code(),
+				e.Details(),
+			)
+		} else {
+			encoded, err := e.JSON()
+			if err != nil {
+				return fmt.Errorf("bug: failed to encode error entry (%w)", err)
+			}
+			fmt.Printf("%s\n", encoded)
 		}
-		fmt.Printf("%s\n", encoded)
 	}
 	return nil
 }

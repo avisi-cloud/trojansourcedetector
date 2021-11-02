@@ -39,7 +39,7 @@ You can customize the behavior by providing a config file. This file is named `.
 | `detect_bidi` | Detect bidirectional control characters. These can cause the trojan source problem. Defaults to true. |
 | `parallelism` | How many files to check in parallel. Defaults to 10. |
 
-
+For an example you can take a look at the [.trojansourcedetector.json](.trojansourcedetector.json) in this repository.
 
 ## Building
 

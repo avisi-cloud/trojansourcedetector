@@ -1,6 +1,7 @@
 package trojansourcedetector_test
 
 import (
+	"fmt"
 	"os"
 	"path/filepath"
 	"testing"
@@ -22,6 +23,14 @@ func TestE2E(t *testing.T) {
 	})
 
 	errs := detector.Run()
+
+	for _, e := range errs.Get() {
+		data, err := e.JSON()
+		if err != nil {
+			t.Fatalf("failed to generate JSON from error (%v)", err)
+		}
+		fmt.Printf("%s\n", data)
+	}
 
 	assertHasError(t, errs, trojansourcedetector.ErrBIDI, "bidi.txt", 1, 44)
 	assertHasError(t, errs, trojansourcedetector.ErrUnicode, "unicode.txt", 1, 29)

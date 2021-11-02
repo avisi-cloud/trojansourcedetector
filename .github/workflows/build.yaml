@@ -103,7 +103,7 @@ jobs:
       - golangci-lint
       - codeql
       - test
-      - selftest
+      - trojansource
     steps:
       - name: Checkout
         uses: actions/checkout@v2

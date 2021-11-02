@@ -28,7 +28,7 @@ You can also run it on any CI system by simply downloading the [released binary]
 
 ## Configuration
 
-You can customize the behavior by providing a config file. This file is named `.trojansourcedetector.json` by default, but can be changed using the `-config` option. It has the following fields:
+You can customize the behavior by providing a config file. This file is named `.trojansourcedetector.json` by default and has the the following fields:
 
 | Field | Description |
 |-------|-------------|
@@ -40,6 +40,26 @@ You can customize the behavior by providing a config file. This file is named `.
 | `parallelism` | How many files to check in parallel. Defaults to 10. |
 
 For an example you can take a look at the [.trojansourcedetector.json](.trojansourcedetector.json) in this repository.
+
+If you want to use a different file name, you can change your GitHub Actions config:
+
+```yaml
+jobs:
+  trojansource:
+    name: Trojan Source Detection
+    runs-on: ubuntu-latest
+    steps:
+      # Checkout your project with git
+      - name: Checkout
+        uses: actions/checkout@v2
+      # Run trojansourcedetector
+      - name: Trojan Source Detector
+        uses: haveyoudebuggedit/trojansourcedetector
+        with:
+          config: path/to/config/file
+```
+
+Or, if you are using the command line version, you can simply pass the `-config` option with the appropriate config file.
 
 ## Building
 

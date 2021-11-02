@@ -90,7 +90,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
       - name: Trojan Source Detector
-        uses: haveyoudebuggedit/trojansourcedetector
+        uses: haveyoudebuggedit/trojansourcedetector@v1
   selftest:
     name: Self-test
     runs-on: ubuntu-latest

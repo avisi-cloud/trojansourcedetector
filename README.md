@@ -17,7 +17,7 @@ jobs:
         uses: actions/checkout@v2
       # Run trojansourcedetector
       - name: Trojan Source Detector
-        uses: haveyoudebuggedit/trojansourcedetector
+        uses: haveyoudebuggedit/trojansourcedetector@v1
 ```
 
 You can also run it on any CI system by simply downloading the [released binary](https://github.com/haveyoudebuggedit/trojansourcedetector/releases) and running:
@@ -54,7 +54,7 @@ jobs:
         uses: actions/checkout@v2
       # Run trojansourcedetector
       - name: Trojan Source Detector
-        uses: haveyoudebuggedit/trojansourcedetector
+        uses: haveyoudebuggedit/trojansourcedetector@v1
         with:
           config: path/to/config/file
 ```

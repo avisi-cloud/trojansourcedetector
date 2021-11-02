@@ -14,7 +14,7 @@ func main() {
 	}
 
 	for file, contents := range data {
-		_ = os.MkdirAll(filepath.Base(file), 0)
+		_ = os.MkdirAll(filepath.Dir(file), 0)
 		if err := ioutil.WriteFile(
 			file,
 			[]byte(contents),

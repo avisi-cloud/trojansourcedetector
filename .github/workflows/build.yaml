@@ -92,7 +92,7 @@ jobs:
         uses: actions/checkout@v2
       # Run trojansourcedetector
       - name: Trojan Source Detector
-        uses: .
+        uses: ./
   release:
     name: release
     runs-on: ubuntu-latest

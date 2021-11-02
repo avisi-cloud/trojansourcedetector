@@ -14,11 +14,11 @@ func main() {
 	}
 
 	for file, contents := range data {
-		_ = os.MkdirAll(filepath.Dir(file), os.ModePerm)
+		_ = os.MkdirAll(filepath.Dir(file), 0755)
 		if err := ioutil.WriteFile(
 			file,
 			[]byte(contents),
-			0,
+			0644,
 		); err != nil {
 			panic(fmt.Errorf("failed to write %s (%w)", file, err))
 		}

@@ -28,7 +28,7 @@ You can also run it on any CI system by simply downloading the [released binary]
 
 ## Configuration
 
-You can customize the behavior by providing a config file. This file is named `.trojansourcedetector.json` by default and has the the following fields:
+You can customize the behavior by providing a config file. This file is named `.trojansourcedetector.json` by default and has the following fields:
 
 | Field | Description |
 |-------|-------------|

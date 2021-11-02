@@ -35,7 +35,7 @@ func TestNoUnicode(t *testing.T) {
 
 func TestUnicodeInFirstLine(t *testing.T) {
 	detector := trojansourcedetector.UnicodeDetector()
-	data := []byte("Hello world! á")
+	data := []byte("Hello world! \u00E1")
 	errs := detector.Detect("test.txt", bufio.NewReader(bytes.NewReader(data)))
 	if len(errs.Get()) < 1 {
 		t.Fatalf(
@@ -55,7 +55,7 @@ func TestUnicodeInFirstLine(t *testing.T) {
 
 func TestUnicodeInSecondLine(t *testing.T) {
 	detector := trojansourcedetector.UnicodeDetector()
-	data := []byte("Hello world!\ná")
+	data := []byte("Hello world!\n\u00E1")
 	errs := detector.Detect("test.txt", bufio.NewReader(bytes.NewReader(data)))
 	if len(errs.Get()) < 1 {
 		t.Fatalf(

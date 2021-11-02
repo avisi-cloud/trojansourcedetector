@@ -46,7 +46,7 @@ func writeErrors(errors trojansourcedetector.Errors) error {
 				e.Line(),
 				e.Column(),
 				e.Code(),
-				e.Details(),
+				fmt.Sprintf("%s: %s", e.Code(), e.Details()),
 			)
 		} else {
 			encoded, err := e.JSON()

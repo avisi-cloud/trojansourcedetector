@@ -3,6 +3,8 @@ package main
 import (
 	"fmt"
 	"io/ioutil"
+	"os"
+	"path/filepath"
 )
 
 func main() {
@@ -12,6 +14,7 @@ func main() {
 	}
 
 	for file, contents := range data {
+		_ = os.MkdirAll(filepath.Base(file), 0)
 		if err := ioutil.WriteFile(
 			file,
 			[]byte(contents),

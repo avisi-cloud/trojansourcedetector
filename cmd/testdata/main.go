@@ -14,7 +14,7 @@ func main() {
 	}
 
 	for file, contents := range data {
-		_ = os.MkdirAll(filepath.Dir(file), 0)
+		_ = os.MkdirAll(filepath.Dir(file), os.ModePerm)
 		if err := ioutil.WriteFile(
 			file,
 			[]byte(contents),

@@ -12,6 +12,8 @@ type Config struct {
 	// Include limits the paths to only include the listed files or directories. Basic pattern matching is supported
 	// as described in the Go filepath pattern matching docs: https://pkg.go.dev/path/filepath#Match
 	Include []string `json:"include"`
+	// Extensions limits the paths to just include the listed extensions.
+	Extensions []string `json:"extensions"`
 	// Exclude contains a list of files or paths never to include in the scan. Basic pattern matching is supported as
 	// described in the Go filepath pattern matching docs: https://pkg.go.dev/path/filepath#Match
 	Exclude []string `json:"exclude"`

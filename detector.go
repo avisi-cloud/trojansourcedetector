@@ -79,6 +79,19 @@ func (d *detector) Run() Errors {
 					return nil
 				}
 			}
+			if len(d.config.Extensions) != 0 {
+				match := false
+				for _, ext := range d.config.Extensions {
+					actualExt := filepath.Ext(path)
+					if  actualExt == ext {
+						match = true
+						break
+					}
+				}
+				if !match {
+					return nil
+				}
+			}
 			for _, exclude := range d.config.Exclude {
 				matches, err := filepath.Match(exclude, reportedPath)
 				if err != nil {
